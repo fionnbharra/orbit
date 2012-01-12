@@ -505,6 +505,40 @@
           }
         }
         
+        //really quick random animation - hack job - only vertical & hortizontal at the moment
+        if (this.options.animation == "random") { 
+          var rndNumber  = Math.floor(Math.random()*11);
+          console.log(rndNumber)
+          function isOdd(num) { return num % 2;}
+          if(isOdd(rndNumber)){
+            if (slideDirection == "prev") {
+              this.$slides
+                .eq(this.activeSlide)
+                .css({"top": this.orbitHeight, "z-index" : 3})
+                .animate({"top" : 0}, this.options.animationSpeed, this.resetAndUnlock);
+            }
+            if (slideDirection == "next") {
+              this.$slides
+                .eq(this.activeSlide)
+                .css({"top": -this.orbitHeight, "z-index" : 3})
+                .animate({"top" : 0}, this.options.animationSpeed, this.resetAndUnlock);
+            }
+          } else {
+             if (slideDirection == "next") {
+                this.$slides
+                  .eq(this.activeSlide)
+                  .css({"left": this.orbitWidth, "z-index" : 3})
+                  .animate({"left" : 0}, this.options.animationSpeed, this.resetAndUnlock);
+              }
+              if (slideDirection == "prev") {
+                this.$slides
+                  .eq(this.activeSlide)
+                  .css({"left": -this.orbitWidth, "z-index" : 3})
+                  .animate({"left" : 0}, this.options.animationSpeed, this.resetAndUnlock);
+              }
+          }
+        }
+        
         this.setCaption();
       }
     }
